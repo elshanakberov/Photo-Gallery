@@ -24,7 +24,23 @@
                             <small><?php
 
 
-                             $user= new User();
+                            //  $user= new User();
+                            //  $user->user_name = "Nargiz";
+                            //  $user->user_password = "123";
+                            //  $user->create();
+                             $photo= new Photo();
+                             $photo->photo_title = "Third Title";
+                             $photo->photo_description = "We are testing";
+                            // $photo->create();
+
+                             $users = User::findAll();
+                             foreach ($users as $user) {
+                                 echo $user->user_name;
+                             }
+                             $photos = Photo::findAll();
+                             foreach ($photos as $photo) {
+                                 echo $photo->photo_title;
+                             }
                             // $user->user_name = "Carla";
                             // $user->user_password = "123";
                             // $user->create();
@@ -45,11 +61,11 @@
                           //  $user->user_password = "12345";
                             //$user->save();
 
-                            $property = $user->propertiesValues();
-                            $keys = implode("," ,$property);
-                            print_r('<pre>');
-                            print_r($keys);
-                            print_r('</pre>');
+                            // $property = $user->propertiesValues();
+                            // $keys = implode("," ,$property);
+                            // print_r('<pre>');
+                            // print_r($keys);
+                            // print_r('</pre>');
 
                             ?>
                           </small>
