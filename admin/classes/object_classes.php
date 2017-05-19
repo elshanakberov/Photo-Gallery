@@ -13,22 +13,32 @@
 
             public static function query($sql){
                 global $database;
+
                 $result = $database->query($sql);
                 $theObjectarray = array();
+
                 while ($row = mysqli_fetch_array($result)) {
+
                     $theObjectarray[] = static::instantiate($row);
+
                 }
                 return $theObjectarray;
             }
 
             private static function instantiate($row){
+
                 $calledClass = get_called_class();
                 $theObject  = new $calledClass;
                 //$theObject->id = $row['id'];
+
                 foreach ($row as $property => $value) {
+
                     if ($theObject->hasProperty($property)) {
+
                           $theObject->$property = $value;
+
                     }
+
                 }
                 return $theObject;
             }
@@ -44,41 +54,58 @@
 
             public function properties(){
                 $properties = array();
+
                 foreach (static::$db_table_field as $db_field) {
+
                       if (property_exists($this,$db_field)) {
+
                             $properties[$db_field] = $this->$db_field;
+
                       }
+
                 }
                 return $properties;
             }
 
             public function propertiesValues(){
+
                 $properties_pairs = [];
+
                 foreach ($this->properties() as $key => $value) {
+
                     $properties_pairs[] = "{$key} = '{$value}'";
+
                 }
                 return $properties_pairs;
             }
 
             public function cleanProperties(){
+
                 global $database;
                 $cleanProperties = [];
+
                 foreach ($this->properties() as $key => $value) {
+
                     $cleanProperties[$key] = $database->escape($value);
+
                 }
                 return $cleanProperties;
             }
 
 
             public  function create(){
+
                 global $database;
+
                 $properties = $this->cleanProperties();
                 $sql = "INSERT INTO ".static::$db_table."(" .implode(',' , array_keys($properties)).")";
                 $sql .= "VALUES( '".implode("','" , array_values($properties))."')";
 
                 if ($database->query($sql)) {
+
                     $this->id = $database->the_insert_id();
                     return true;
+
                 }else{
                   return false;
                 }
@@ -87,11 +114,15 @@
             public function update(){
 
               global $database;
-              $properties_pairs = $this->cleanProperties();
-              $sql = "UPDATE ".static::$db_table." SET ";
+
+              $properties = $this->cleanProperties();
+              $properties_pairs = $this->propertiesValues();
+
+              $sql = "UPDATE " .static::$db_table. " SET ";
               $sql .= implode(", ",$properties_pairs);
             //  $sql .= "user_name = '" .$database->escape($this->user_name)."' , ";``
               $sql .= " WHERE id = ".$database->escape($this->id);
+
               $database->query($sql);
 
 

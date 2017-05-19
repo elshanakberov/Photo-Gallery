@@ -2,9 +2,9 @@
 
     class Photo extends Object{
 
-      public $id,$photo_title,$photo_filename,$photo_description,$photo_type,$photo_size;
+      public $id,$photo_title,$photo_filename,$photo_description,$photo_type,$photo_size,$photo_caption,$alternate_text;
       protected static $db_table = "photos";
-      protected static $db_table_field = ['photo_title','photo_filename','photo_description','photo_type','photo_size'];
+      protected static $db_table_field = ['photo_title','photo_filename','photo_description','photo_type','photo_size','photo_caption','alternate_text'];
       public $tmp_path,$upload_directory = "images", $errors = [], $upload_errors_array = [
         UPLOAD_ERR_OK         => "There is no error",
         UPLOAD_ERR_INI_SIZE   => "The upload file exceeds the upload_max_size directive",
@@ -94,6 +94,17 @@
           }
 
        }
+
+       public function deletePhoto(){
+
+                    $this->delete();
+
+                    $target_path = SITE_ROOT.DS.'admin'.DS.$this->picturePath();
+                    return unlink($target_path) ? true : false;
+
+
+
+            }
 
     }
 

@@ -40,12 +40,23 @@
                                             foreach ($photos as $photo) : ?>
                                               <tr>
                                               <td><?php echo $photo->id; ?></td>
-                                              <td><img class='img-responsive' width='130px'src="<?php echo$photo->picturePath(); ?>" alt=""></td>
+                                              <td><img class='img-responsive' width='130px'src="<?php echo$photo->picturePath(); ?>" alt="">
+                                                <div class="pictures_link">
+                                                    <a href="delete_photo.php?id=<?=$photo->id;?>">Delete</a>
+                                                    <a href="edit_photo.php?id=<?=$photo->id;?>">Edit</a>
+                                                    <a href="#">View</a>
+                                                </div>
+                                              </td>
                                               <td><?php echo $photo->photo_title;  ?></td>
                                               <td><?php echo $photo->photo_filename;  ?></td>
                                               <td><?php echo$photo->photo_size;?></td>
                                               </tr>
                                             <?php endforeach; ?>
+                                            <?php
+
+
+
+                                             ?>
 
                                 </tbody>
                             </table>
