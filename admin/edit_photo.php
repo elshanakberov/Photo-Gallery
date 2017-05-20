@@ -6,7 +6,7 @@ if (empty($_GET['id'])) {
         redirect('photos.php');
 }else{
 
-          $photo = Photo::findByid($_GET['id']);
+      $photo = Photo::findByid($_GET['id']);
 
         if (isset($_POST['update'])) {
             if ($photo) {
@@ -15,8 +15,6 @@ if (empty($_GET['id'])) {
                 $photo->photo_caption         =   $_POST['photo_caption'];
                 $photo->alternate_text        =   $_POST['alternate_text'];
                 $photo->photo_description     =   $_POST['photo_description'];
-
-
 
                $photo->save();
 
@@ -49,6 +47,9 @@ if (empty($_GET['id'])) {
                                       <input type="text" name="photo_title" value="<?= $photo->photo_title;?>" class="form-control" >
                                   </div>
                                   <div class="form-group">
+                                      <a href="#"><img class='img-responsive thumbnail' width='200px' src="<?= $photo->picturePath(); ?>" alt=""></a>
+                                  </div>
+                                  <div class="form-group">
                                       <label for="photo_caption">Caption</label>
                                       <input type="text" name="photo_caption" value="<?= $photo->photo_caption;?>" class="form-control">
                                   </div>
@@ -58,7 +59,7 @@ if (empty($_GET['id'])) {
                                   </div>
                                   <div class="form-group">
                                       <label for="">Description</label>
-                                      <textarea name="photo_description" rows="10" cols="30" class="form-control"><?= $photo->photo_description;?></textarea>
+                                      <textarea name="photo_description" rows="10" cols="30" class="form-control"><?=$photo->photo_description;?></textarea>
                                   </div>
 
 
@@ -109,12 +110,7 @@ if (empty($_GET['id'])) {
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-</body>
+<?php include_once('include/admin_footer.php'); ?>
 
 </html>

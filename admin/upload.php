@@ -43,7 +43,7 @@
                             <small>Panel
                             <?php
 
-                              
+
 
                              ?></small>
 
