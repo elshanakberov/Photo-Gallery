@@ -26,6 +26,68 @@
 
        }
 
+       public function setFile($file){
+
+           if (empty($file) || !$file || !is_array($file)) {
+
+               $this->errors[] = "No file was uploaded";
+               return false;
+
+           }elseif($file['error'] != 0){
+
+               $this->errors[] = $this->upload_errors_array[$file['error']];
+               return false;
+
+           }else{
+
+               $this->user_image = basename($file['name']);
+               $this->tmp_path       = $file['tmp_name'];
+               $this->photo_type     = $file['type'];
+               $this->photo_size     = $file['size'];
+
+         }
+
+       }
+
+       public function saveUserImage(){
+
+
+               if (!empty($this->errors)) {
+
+                   return false;
+
+               }
+
+               if (empty($this->user_image || empty($this->tmp_path))) {
+
+                   $this->errors[] = "The File was not avaiable";
+                   return false;
+
+               }
+
+               $target_path = SITE_ROOT . DS .'admin'. DS.'images'. DS.$this->user_image;
+
+
+               if (file_exists($target_path)) {
+                   $this->errors[] = "The File already exists ";
+                   return false;
+               }
+
+               if (move_uploaded_file($this->tmp_path,$target_path)) {
+
+                       unset($this->tmp_path);
+                       return true;
+
+               }else{
+
+                     $this->errors[] = "The Folder was probably does not have permission";
+                     return false;
+
+               }
+
+
+        }
+
     }
 
     $user = new User();

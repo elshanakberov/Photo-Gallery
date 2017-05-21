@@ -97,12 +97,10 @@
 
        public function deletePhoto(){
 
-                    $this->delete();
+                $this->delete();
 
-                    $target_path = SITE_ROOT.DS.'admin'.DS.$this->picturePath();
-                    return unlink($target_path) ? true : false;
-
-
+                $target_path = SITE_ROOT.DS.'admin'.DS.$this->picturePath();
+                return unlink($target_path) ? true : false;
 
             }
 
