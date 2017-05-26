@@ -5,6 +5,8 @@ include ("classes/new_config.php");
 include ("classes/database_classes.php");
 include ("classes/session_classes.php");
 include ("classes/user_classes.php");
+include ("classes/photo_classes.php");
+include ("classes/comment_classes.php");
 //include ("classes/object_classes.php");
 
 defined('DS') ? null : define('DS',DIRECTORY_SEPARATOR);

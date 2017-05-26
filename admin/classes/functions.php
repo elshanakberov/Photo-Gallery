@@ -3,7 +3,7 @@
 
 
 function __autoload($class){
- $class =strtolower($class);
+ $class = strtolower($class);
  $path = "classes/{$class}_classes.php";
      if(file_exists($path)){
        require_once($path);

@@ -1,4 +1,4 @@
-<?php include ("init.php"); ?>
+<?php include ("admin/include/init.php"); ?>
 <?php
 
   if (!$session->isSignedin()) {

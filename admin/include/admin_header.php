@@ -1,5 +1,7 @@
 <?php include ("init.php"); ?>
-
+<?php
+    set_include_path(dirname(__FILE__));
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
