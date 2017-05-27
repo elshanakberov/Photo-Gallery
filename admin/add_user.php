@@ -3,25 +3,25 @@
 <?php
 
 
+if (isset($_POST['create'])) {
+
+     if ($user) {
+
+         $user->user_name        =   $_POST['user_name'];
+         $user->user_firstname   =   $_POST['user_firstname'];
+         $user->user_lastname    =   $_POST['user_lastname'];
+         $user->user_password    =   $_POST['user_password'];
+
+         $user->setFile($_FILES['user_image']);
+         $user->saveUserImage();
+         $user->save();
+         redirect("users.php");
+
+     }
+}
 
 
-       if (isset($_POST['create'])) {
-
-            if ($user) {
-
-                $user->user_name        =   $_POST['user_name'];
-                $user->user_firstname   =   $_POST['user_firstname'];
-                $user->user_lastname    =   $_POST['user_lastname'];
-                $user->user_password    =   $_POST['user_password'];
-
-                $user->setFile($_FILES['user_image']);
-                $user->saveUserImage();
-            }
-       }
-
-
- ?>
-
+?>
 <body>
 
     <div id="wrapper">
@@ -38,7 +38,9 @@
                         <h1 class="page-header col-md-6 col-md-offset-3">
                             User
                             <small>
-                                  Add
+                  ADD
+
+
                             </small>
                         </h1>
                         <form class="form-group" action="" method="POST" enctype="multipart/form-data">

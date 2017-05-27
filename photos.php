@@ -1,11 +1,15 @@
 <?php
 
-    if (file_exists("admin/include/init.php")) {
-          if ( is_readable("admin/include") && is_writable("admin/include")) {
-                require_once(dirname(__FILE__).'/admin/include/init.php');
-                echo "true";
+    if (file_exists("admin/classes/init.php")) {
+          if (is_readable("admin/classes") && is_writable("admin/classes")) {
+                if (require_once(dirname(__FILE__).'/admin/classes/init.php')) {
+                    $photo = Photo::findByid($_GET['id']);
+                    echo  $photo->photo_description;
+                }else {
+                      echo "Error";
+                }
         }else{
-          echo "False";
+            echo "False";
         }
     }
  ?>

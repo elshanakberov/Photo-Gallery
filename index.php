@@ -1,9 +1,5 @@
 <?php include_once "include/header.php"; ?>
-<?php
 
-
-set_include_path(dirname(__FILE__));
- ?>
 <body>
 
     <!-- Navigation -->

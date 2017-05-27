@@ -1,5 +1,5 @@
 <?php
-  require_once("include/init.php");
+  require_once("classes/init.php");
   $session->logout();
   redirect("login.php");
 
