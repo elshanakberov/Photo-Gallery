@@ -1,4 +1,8 @@
 <?php include_once "include/admin_header.php"; ?>
+<?php if (!$session->isSignedin()) { redirect("login.php"); } ?>
+<?php
+
+ ?>
 
 <body>
 
@@ -14,17 +18,62 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Comments
-                            <small>Subheading</small>
+                          <?php if (!isset($_GET['id']) && empty($_GET['id'])): ?>
+                                Comments
+                          <?php else: ?>
+                              Comments of id <?=$_GET['id'];?>
+                          <?php endif; ?>
                         </h1>
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-file"></i> Comments
-                            </li>
-                        </ol>
+                        <div class="col-md-12">
+                            <table class="table table-hover table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Author</th>
+                                        <th>Body</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+
+                                <?php if (!isset($_GET['id']) && empty($_GET['id'])) : ?>
+
+                                  <?php
+                                       $comments = Comment::findAll();
+                                        foreach ($comments as $comment) : ?>
+                                              <tr>
+                                                  <td><?=$comment->id; ?></td>
+                                                  <td><?=$comment->author;  ?>
+                                                    <div class="action_link">
+                                                        <a href="delete_comment.php?id=<?=$comment->id;?>">Delete</a>
+                                                    </div>
+                                                  </td>
+                                                  <td><?=$comment->body;?></td>
+                                              </tr>
+                                    <?php endforeach; ?>
+
+                                <?php else: ?>
+
+                                  <?php
+                                       $comments = Comment::findComments($_GET['id']);
+                                        foreach ($comments as $comment) : ?>
+                                          <tr>
+                                          <td><?=$comment->id; ?></td>
+                                          </td>
+                                          <td><?=$comment->author;  ?>
+                                            <div class="action_link">
+                                                <a href="delete_comment.php?id=<?=$comment->id;?>">Delete</a>
+                                            </div>
+                                          </td>
+                                          <td><?=$comment->body;?></td>
+
+                                          </tr>
+                                    <?php endforeach; ?>
+
+                                  <?php endif; ?>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -36,14 +85,5 @@
         <!-- /#page-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-</body>
-
+  <?php include_once('include/admin_footer.php'); ?>
 </html>

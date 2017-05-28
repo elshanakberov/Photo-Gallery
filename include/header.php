@@ -1,5 +1,5 @@
 <?php
-
+    include ("admin/core/init.php");
     set_include_path(dirname(__FILE__));
 
  ?>
@@ -19,6 +19,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/blog-home.css" rel="stylesheet">

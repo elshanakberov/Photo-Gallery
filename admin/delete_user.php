@@ -1,4 +1,4 @@
-<?php include_once "classes/init.php"; ?>
+<?php include_once "core/init.php"; ?>
 <?php if (!$session->isSignedin()) {redirect("login.php");} ?>
 <?php
 

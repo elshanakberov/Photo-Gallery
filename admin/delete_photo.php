@@ -1,4 +1,4 @@
-<?php include_once "classes/init.php"; ?>
+<?php include_once "core/init.php"; ?>
 <?php if (!$session->isSignedin()) {redirect("login.php");} ?>
 <?php
 
@@ -10,9 +10,12 @@
 
         $photo = Photo::findByid($_GET['id']);
 
+
+
         if ($photo) {
 
             $photo->deletePhoto();
+            Comment::deletePhotoComment($_GET['id']);
             redirect('photos.php');
 
         }else{

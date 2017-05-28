@@ -34,6 +34,16 @@
 
       }
 
+      public static function deletePhotoComment($photo_id = 0){
+        global $database;
+
+        $sql = "DELETE FROM comments WHERE photo_id = {$photo_id} ";
+
+        return self::query($sql);
+
+      }
+
+
     }
 
     $comment = new Comment();
