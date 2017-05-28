@@ -10,11 +10,13 @@
 
           if (!empty($photo_id) && !empty($author) && !empty($body)) {
 
-                $this->photo_id  =  (int)$photo_id;
-                $this->author    = $author;
-                $this->body      = $body;
+                $comment = new self();
 
-                return $this;
+                $comment->photo_id  =  (int)$photo_id;
+                $comment->author    = $author;
+                $comment->body      = $body;
+
+                return $comment;
           }else{
                 return false;
           }

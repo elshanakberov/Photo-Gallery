@@ -1,17 +1,31 @@
 <?php
 
-    if (file_exists("admin/classes/init.php")) {
-          if (is_readable("admin/classes") && is_writable("admin/classes")) {
-                if (require_once(dirname(__FILE__).'/admin/classes/init.php')) {
-                    $photo = Photo::findByid($_GET['id']);
-                    echo  $photo->photo_description;
-                }else {
-                      echo "Error";
-                }
-        }else{
-            echo "False";
+    if (file_exists("admin/core/init.php")) {
+          if (is_readable("admin/core") && is_writable("admin/core")) {
+              require_once(dirname(__FILE__).'/admin/core/init.php');
         }
     }
+
+    if (empty($_GET['id'])) {
+        redirect("index.php");
+    }
+
+    $photo = Photo::findByid($_GET['id']);
+
+    if (isset($_POST['submit'])) {
+
+          $author = trim($_POST['author']);
+          $body  = trim($_POST['body']);
+
+          $newComment = Comment::createComment($photo->id,$author,$body);
+
+          if ($newComment && $newComment->save()) {
+              redirect("photos.php?id=$photo->id");
+          }
+
+    }
+    $comments = Comment::findComments($photo->id);
+
  ?>
 
 <!DOCTYPE html>
@@ -138,17 +152,19 @@
                 <!-- Posted Comments -->
 
                 <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                <?php foreach ($comments as $comment) : ?>
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="http://placehold.it/64x64" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><?=$comment->author; ?>
+                                <small><?=date("d-m-y");  ?></small>
+                            </h4>
+                            <?=$comment->body; ?>
+                        </div>
                     </div>
-                </div>
+              <?php endforeach; ?>
 
 
 
