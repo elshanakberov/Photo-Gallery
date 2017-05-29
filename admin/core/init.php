@@ -16,5 +16,6 @@ include (CLASSES_PATH.DS."session_classes.php");
 include (CLASSES_PATH.DS."user_classes.php");
 include (CLASSES_PATH.DS."photo_classes.php");
 include (CLASSES_PATH.DS."comment_classes.php");
+include (CLASSES_PATH.DS."paginate_classes.php");
 
  ?>

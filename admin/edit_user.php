@@ -32,7 +32,7 @@
  ?>
 
 <body>
-
+  <?php include("include/photo_modal.php"); ?>
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -51,8 +51,8 @@
                             </small>
                         </h1>
 
-                        <div class="col-md-6">
-                            <img class="img-responsive" src="<?=$user->userImage(); ?>" alt="">
+                        <div class="col-md-6 user_image-box">
+                            <a href="#" data-toggle="modal" data-target="#photo-library"><img class="img-responsive" src="<?=$user->userImage(); ?>" alt=""></a>
                         </div>
                         <form class="form-group" action="" method="POST" enctype="multipart/form-data">
                         <div class="col-md-6 ">
@@ -80,9 +80,10 @@
                                   </div>
                                   <div class="form-group">
 
-                                      <a class="btn btn-danger pull-left" href="delete_user.php?id=<?=$user->id ?>">Delete</a>
+                                      <a id="user-id" class="btn btn-danger pull-left" href="delete_user.php?id=<?=$user->id ?>">Delete</a>
                                   </div>
                                   <div class="form-group">
+
                                       <input type="submit" name="update" value="Update" class="btn btn-primary pull-right">
                                   </div>
 

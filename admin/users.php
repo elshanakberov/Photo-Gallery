@@ -26,10 +26,11 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>user</th>
-                                        <th>user Title</th>
-                                        <th>File name</th>
-                                        <th>Size</th>
+                                        <th>User Image</th>
+                                        <th>Username</th>
+                                        <th>User Firstname</th>
+                                        <th>User lastname</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,13 +42,14 @@
                                               <tr>
                                               <td><?php echo $user->id; ?></td>
                                               <td><img class='img-responsive user_image' src="<?php echo $user->userImage(); ?>" alt="">
-                                              </td>
-                                              <td><?php echo $user->user_name;  ?>
                                                 <div class="action_link">
                                                     <a href="delete_user.php?id=<?=$user->id;?>">Delete</a>
                                                     <a href="edit_user.php?id=<?=$user->id;?>">Edit</a>
                                                     <a href="#">View</a>
                                                 </div>
+                                              </td>
+                                              <td><?php echo $user->user_name;  ?>
+
                                               </td>
                                               <td><?php echo $user->user_firstname;  ?></td>
                                               <td><?php echo$user->user_lastname;?></td>
