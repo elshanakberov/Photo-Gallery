@@ -15,7 +15,6 @@
         if ($photo) {
 
             $photo->deletePhoto();
-            Comment::deletePhotoComment($_GET['id']);
             redirect('photos.php');
 
         }else{

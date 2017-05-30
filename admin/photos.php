@@ -1,6 +1,14 @@
 <?php include_once "include/admin_header.php"; ?>
 <?php if (!$session->isSignedin()) { redirect("login.php"); } ?>
 <?php
+    $page =  !empty($_GET['page']) ? (int)$_GET['page'] : 1;
+    $data_per_page = 3;
+    $class = "Photo";
+
+    $paginate = new Paginate($page,$data_per_page,$class);
+    $sql = "SELECT * FROM photos ";
+    $sql .= "LIMIT {$data_per_page} OFFSET {$paginate->offset()} ";
+    $photos = Photo::query($sql);
 
  ?>
 
@@ -36,7 +44,7 @@
 
 
                                           <?php
-                                           $photos = Photo::findAll();
+                                          // $photo = Photo::findAll();
                                             foreach ($photos as $photo) : ?>
                                               <tr>
                                               <td><?php echo $photo->id; ?></td>
@@ -59,8 +67,32 @@
 
                                              ?>
 
+
+
                                 </tbody>
+
+
                             </table>
+
+                            <div class="row">
+                              <ul class="pager">
+                                    <?php $pages =  $paginate->totalPage($paginate->class="photo"); ?>
+                                    <?php
+                                    if ($pages > 1){
+
+                                          for ($i=1; $i <=$pages ; $i++) {
+                                              if ($i == $paginate->current_page){
+                                                  echo "<li class='active'><a href='photos.php?page={$i}'>$i</a></li>";
+                                              }else{
+                                                  echo "<li class='active'><a href='photos.php?page={$i}'>$i</a></li>";
+                                              }
+                                          }
+
+                                    }
+                                 ?>
+                              </ul>
+                            </div>
+
                         </div>
                     </div>
                 </div>
