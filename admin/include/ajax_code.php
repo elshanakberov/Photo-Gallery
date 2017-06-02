@@ -8,4 +8,8 @@
 
       }
 
+      if (isset($_POST["image_id"])) {
+          echo "<h1>TRUE</h1>";
+      }
+
  ?>

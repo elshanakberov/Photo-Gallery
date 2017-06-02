@@ -20,7 +20,7 @@
                         <?php foreach ($photos as $photo): ?>
                         <div class="col-xs-2">
                             <a href="#" role="checkbox" aria-checked="false" tabindex="0" id="" class="thumbnail">
-                                <img class="modal_thumbnails img-responsive" src="<?= $photo->picturePath(); ?>" alt="">
+                                <img class="modal_thumbnails img-responsive" src="<?= $photo->picturePath(); ?>" data="<?=$photo->id;?>" alt="">
                             </a>
                             <div class="photo-id hidden"></div>
                         </div>

@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
   var user_href,user_href_splitted,user_id;
-  var image_src,image_href_splitted,image_name;
+  var image_id,image_src,image_href_splitted,image_name;
 
 
   $(".modal_thumbnails").click(function(){
@@ -14,6 +14,21 @@ $(document).ready(function(){
       image_src =  $(this).prop("src");
       image_href_splitted = image_src.split("/");
       image_name = image_href_splitted[image_href_splitted.length - 1];
+
+      image_id = $(this).attr("data");
+
+      $.ajax({
+
+        url:"include/ajax_code.php",
+        data:{image_id:image_id},
+        type: "POST",
+        success:function(data){
+            if (!data.error) {
+                $("#modal_sidebar").html(data);
+            }
+        }
+
+      });
 
   });
 
