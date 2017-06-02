@@ -13,6 +13,7 @@
         if ($user) {
 
             $user->delete();
+            $user->deletePhoto();
             redirect('users.php');
 
         }else{

@@ -17,6 +17,9 @@
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
+                      <p class="bg-success">
+                          <?=$session->message; ?>
+                      </p>
                         <h1 class="page-header">
                             users
                             <small><a href="add_user.php" class="btn btn-primary">Add User</a></small>

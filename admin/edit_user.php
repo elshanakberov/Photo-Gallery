@@ -4,6 +4,7 @@
 
       if (empty($_GET['id'])) {
             redirect('users.php');
+            $user->save();
       }
 
       $user = User::findByid($_GET['id']);
@@ -19,11 +20,14 @@
                 $user->user_password    =   $_POST['user_password'];
                   if (empty($_FILES['user_image'])) {
                           $user->save();
+                          $session->message("user updated");
+                          redirect("users.php");
                   }else{
-                    $user->setFile($_FILES['user_image']);
-                    $user->saveUserImage();
-                    $user->save();
-                    redirect("edit_user.php?id={$user->id}");
+                          $user->setFile($_FILES['user_image']);
+                          $user->saveUserImage();
+                          $user->save();
+                          $session->message("user updated");
+                          redirect("users.php");
                   }
             }
        }

@@ -9,7 +9,7 @@
       }
 
       if (isset($_POST["image_id"])) {
-          echo "<h1>TRUE</h1>";
+          User::sidebarData($_POST["image_id"]);
       }
 
  ?>

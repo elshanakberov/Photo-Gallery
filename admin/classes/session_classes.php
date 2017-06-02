@@ -3,12 +3,39 @@
     class Session{
 
       private $signedIn = false;
-      public $userId,$username;
+      public $userId,$username,$message0;
 
       public function __construct(){
           session_start();
           $this->checkLogin();
+          $this->checkMessage();
       }
+
+      public function message($msg=""){
+
+          if (!empty($msg)) {
+
+              $_SESSION['message'] = $msg;
+
+          }else{
+              return  $this->message;
+          }
+
+      }
+
+      private function checkMessage() {
+          if (isset($_SESSION['message'])) {
+
+              $this->message = $_SESSION['message'];
+              unset($_SESSION['message']);
+
+          }else{
+
+              $this->message = "";
+
+          }
+      }
+
       public function isSignedin(){
           return $this->signedIn;
       }

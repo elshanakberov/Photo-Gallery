@@ -105,6 +105,26 @@
 
         }
 
+        public static function sidebarData($id){
+
+            $photo  =  Photo::findByid($id);
+            $output = "<a class='thumbnail' href=''><img width='100' src='{$photo->picturePath()}'><a/>";
+            $output .= "<p>{$photo->photo_filename}</p>";
+            $output .= "<p>{$photo->photo_size}</p>";
+            $output .= "<p>{$photo->photo_type}</p>";
+
+            echo $output;
+        }
+
+        public function deletePhoto(){
+              if ($this->delete()) {
+                  $target_path = SITE_ROOT.DS.'admin'.DS.$this->upload_directory.DS.$this->target_path();
+                  unlink($target_path) ? true : false;
+              }else{
+                return false;
+              }
+        }
+
     }
 
     $user = new User();
