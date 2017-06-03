@@ -103,7 +103,6 @@
 
               echo $this->userImage();
 
-        }
 
         public static function sidebarData($id){
 
